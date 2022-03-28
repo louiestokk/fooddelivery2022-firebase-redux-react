@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AccountBalanceRounded,
   ChatRounded,
@@ -15,7 +15,12 @@ import BannerName from "./components/BannerName";
 import SubMenu from "./components/SubMenu";
 import MenuCard from "./components/MenuCard";
 import image from "./components/images/meny1.jpg";
+import { MenuItems, Items } from "./components/Data";
+import ItemCard from "./components/ItemCard";
 function App() {
+  const [mainData, setMainData] = useState(
+    Items.filter((el) => el.itemId === "buger01")
+  );
   useEffect(() => {
     const menuLi = document.querySelectorAll("#menu li");
     const setMenuActive = (e) => {
@@ -23,7 +28,15 @@ function App() {
       e.currentTarget.classList.add("active");
     };
     menuLi.forEach((el) => el.addEventListener("click", setMenuActive));
-  }, []);
+    const menuCards = document
+      .querySelector(".rowContainer")
+      .querySelectorAll(".rowMenuCard");
+    const setMenuCardActive = (e) => {
+      menuCards.forEach((el) => el.classList.remove("active"));
+      e.currentTarget.classList.add("active");
+    };
+    menuCards.forEach((el) => el.addEventListener("click", setMenuCardActive));
+  }, [mainData]);
   return (
     <div className="App">
       <Header />
@@ -43,14 +56,27 @@ function App() {
             <SubMenu name={"Menu Category"} />
           </div>
           <div className="rowContainer">
-            <div>
-              <MenuCard imgSrc={image} name={"Burger"} isActive />
-            </div>
-            <div>
-              <MenuCard imgSrc={image} name={"Burger"} />
-            </div>
+            {MenuItems?.map((item) => (
+              <div key={item.id}>
+                <MenuCard
+                  imgSrc={item.imgSrc}
+                  name={item.name}
+                  isActive={item.id === 1 ? true : false}
+                />
+              </div>
+            ))}
           </div>
-          <div className="dishitemContainer"></div>
+          <div className="dishItemContainer">
+            {mainData?.map((el) => (
+              <ItemCard
+                key={el.id}
+                imgSrc={el.imgSrc}
+                name={el.name}
+                ratings={el.rating}
+                price={el.price}
+              />
+            ))}
+          </div>
         </div>
         <div className="rightMenu"></div>
       </main>

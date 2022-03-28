@@ -4,7 +4,7 @@ import React from "react";
 
 const SubMenu = ({ name }) => {
   return (
-    <div className="submenuContainer">
+    <div className="subMenuContianer">
       <h3>{name}</h3>
       <div className="viewAll">
         <p>View All</p>
