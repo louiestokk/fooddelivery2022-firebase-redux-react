@@ -12,6 +12,9 @@ import "./App.css";
 import Header from "./components/Header";
 import MenuContainer from "./components/MenuContainer";
 import BannerName from "./components/BannerName";
+import SubMenu from "./components/SubMenu";
+import MenuCard from "./components/MenuCard";
+import image from "./components/images/meny1.jpg";
 function App() {
   useEffect(() => {
     const menuLi = document.querySelectorAll("#menu li");
@@ -34,6 +37,20 @@ function App() {
               className="deliveryPic"
             />
           </div>
+        </div>
+        <div className="dishContainer">
+          <div className="menuCard">
+            <SubMenu name={"Menu Category"} />
+          </div>
+          <div className="rowContainer">
+            <div>
+              <MenuCard imgSrc={image} name={"Burger"} isActive />
+            </div>
+            <div>
+              <MenuCard imgSrc={image} name={"Burger"} />
+            </div>
+          </div>
+          <div className="dishitemContainer"></div>
         </div>
         <div className="rightMenu"></div>
       </main>
